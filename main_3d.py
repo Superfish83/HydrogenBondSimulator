@@ -112,6 +112,7 @@ def step(t):
 
 rotflag = [False, False, False, False]
 pauseFlag = False
+quitFlag = False
 if __name__ == '__main__':
     t = 0
     rot_step = pi/72
@@ -131,6 +132,10 @@ if __name__ == '__main__':
                 system = init_system(m)
                 
             if ev.type == pygame.KEYDOWN:
+                if ev.key == pygame.K_ESCAPE:
+                    quitFlag = True
+                    pygame.quit()
+                    break
                 if ev.key == pygame.K_SPACE:
                     pauseFlag = not pauseFlag
                 if ev.key == pygame.K_a:
@@ -157,5 +162,7 @@ if __name__ == '__main__':
                     rotflag[2] = False
                 if ev.key == pygame.K_DOWN:
                     rotflag[3] = False
+        if quitFlag:
+            break
         step(t)
         t+=1
